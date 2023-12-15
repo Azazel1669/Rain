@@ -13,7 +13,6 @@ def draw(screen):
         for j in range(1, len, 2):
             pygame.draw.polygon(screen, 'orange', [[n1 * (j - 1), n1 * i], [n1 * j, n1 * (i - 1)], [n1 * (j + 1), n1 * i], [n1 * j, n1 * (i + 1)]])
 
-
 if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption("Ромбики")
