@@ -1,0 +1,51 @@
+[
+  {
+    "place": "barn",
+    "persons": {
+      "Twinkie": "short, tassel",
+      "Wolly": "blue-skinned, freckled, vest",
+      "Velvet": "red, blue-skinned, pointy-nosed, cap, freckled"
+    }
+  },
+  {
+    "place": "mill",
+    "persons": {
+      "Yavor": "boots, large-headed, vest, red",
+      "Jollytoes": "blue-skinned, red, cap",
+      "Spark": "cap, pointy-nosed",
+      "Twinkie": "blue-skinned, boots, vest"
+    }
+  },
+  {
+    "place": "yard",
+    "persons": {
+      "Bouncy": "large-headed, vest, boots, pointy-nosed, red"
+    }
+  },
+  {
+    "place": "meadow",
+    "persons": {
+      "Glimmer": "blue-skinned, boots, vest, red",
+      "Twinkie": "vest, boots, tassel, cap, freckled"
+    }
+  },
+  {
+    "place": "kitchen",
+    "persons": {
+      "Happyhuff": "freckled, blue-skinned, sword, tassel",
+      "Twinkie": "blue-skinned, sword, short"
+    }
+  },
+  {
+    "place": "storeroom",
+    "persons": {
+      "Humberdink": "pointy-nosed, boots"
+    }
+  },
+  {
+    "place": "bedroom",
+    "persons": {
+      "Glitter": "red, tassel"
+    }
+  }
+]
