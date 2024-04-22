@@ -1,88 +1,25 @@
-import sys
+import requests
+import json
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLineEdit, QLabel, QTableWidget, QComboBox
+def pixie(w, host='127.0.0.1', same=0):
+    sp = []
+    a = w.split(',')
+    url = f"http://{host}:5000"
+    # response = requests.get(url).json()
+    with open('2.json') as in_file:
+        response = json.load(in_file)
+    for res in response:
+        for q in res['persons']:
+            b = res['persons'][q].split(', ')
+            c = 0
+            for e in b:
+                if e in a:
+                    c += 1
+            if c <= same:
+                r = [q, res['place']]
+                sp.append(r)
+    sp.sort(key=lambda a: a[0])
+    sp.sort(key=lambda a: len(a[1]))
+    return sp
 
-
-class MyWidget(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        self.setGeometry(600, 200, 600, 230)
-        self.setWindowTitle('Поиск по фильмам')
-
-        self.parameterSelection = QComboBox(self)
-        self.parameterSelection.addItems(['Год выпуска', 'Название', 'Продолжительность'])
-        self.parameterSelection.resize(200, 27)
-        self.parameterSelection.move(10, 10)
-
-        if self.parameterSelection.currentTextChanged.connect('Год выпуска'):
-            print(1)
-
-        self.queryLine = QLineEdit(self)
-        self.queryLine.resize(280, 27)
-        self.queryLine.move(215, 10)
-
-        self.queryButton = QPushButton("Поиск", self)
-        self.queryButton.resize(70, 29)
-        self.queryButton.move(500, 9)
-
-        self.name_label0 = QLabel(self)
-        self.name_label0.setText("ID:")
-        self.name_label0.move(10, 40)
-
-        self.name_label = QLabel(self)
-        self.name_label.setText("Название:")
-        self.name_label.move(10, 73)
-
-        self.name_label1 = QLabel(self)
-        self.name_label1.setText("Год выпуска:")
-        self.name_label1.move(10, 109)
-
-        self.name_label2 = QLabel(self)
-        self.name_label2.setText("Жанр:")
-        self.name_label2.move(10, 145)
-
-        self.name_label3 = QLabel(self)
-        self.name_label3.setText("Продолжительность:")
-        self.name_label3.move(10, 184)
-        self.name_label3.adjustSize()
-
-        self.errorLabel = QLabel(self)
-        self.errorLabel.setText("")
-        self.errorLabel.move(10, 213)
-        self.errorLabel.adjustSize()
-
-        self.idEdit = QLineEdit(self)
-        self.idEdit.resize(400, 23)
-        self.idEdit.move(120, 40)
-
-        self.titleEdit = QLineEdit(self)
-        self.titleEdit.resize(400, 23)
-        self.titleEdit.move(120, 73)
-
-        self.yearEdit = QLineEdit(self)
-        self.yearEdit.resize(400, 23)
-        self.yearEdit.move(120, 109)
-
-        self.genreEdit = QLineEdit(self)
-        self.genreEdit.resize(400, 23)
-        self.genreEdit.move(120, 145)
-
-        self.durationEdit = QLineEdit(self)
-        self.durationEdit.resize(400, 23)
-        self.durationEdit.move(120, 184)
-
-
-        # self.parameterSelection.setHorizontalHeaderLabels(['Название', 'Жанр', 'Год'])
-
-        # self.parameterSelection = QTableWidget(self)
-        # self.parameterSelection.setColumnCount(3)
-        # self.parameterSelection.setHorizontalHeaderLabels(['Название', 'Жанр', 'Год'])
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = MyWidget()
-    ex.show()
-    sys.exit(app.exec())
+print(pixie('freckled, short, large-headed, boots, pointy-nosed', host='localhost'))
