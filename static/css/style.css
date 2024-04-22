@@ -25,9 +25,10 @@ button {
  position: absolute/fixed.
 }
 body {
-    background-color: black;
+background-color: black;
 }
 .navbar {
+font-family: "ARIAL BLACK", "Arial", sans-serif;
 --bs-navbar-active-color: red;
 --bs-navbar-brand-color: red;
 --bs-navbar-brand-hover-color: #960019;

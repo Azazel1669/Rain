@@ -1,47 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Регистрация</h1>
+<center><h1 style="color:red;">Регистрация</h1></center>
 <form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
         {{ form.name.label }}<br>
-        {{ form.name(class="form-control") }}<br>
+        {{ form.name(class="form-control",  style="color: white;background-color: black") }}<br>
         {% for error in form.name.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
     </p>
     <p>
         {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
+        {{ form.password(class="form-control", type="password",  style="color: white;background-color: black;") }}<br>
         {% for error in form.password.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
     </p>
     <p>
         {{ form.password_again.label }}<br>
-        {{ form.password_again(class="form-control", type="password") }}<br>
+        {{ form.password_again(class="form-control", type="password",  style="color: white;background-color: black") }}<br>
         {% for error in form.password_again.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
     </p>
-
+    {% endfor %}
+    </p>
     <p>
         {{ form.about.label }}<br>
-        {{ form.about(class="form-control") }}<br>
+        {{ form.about(class="form-control",  style="color: white;background-color: black") }}<br>
         {% for error in form.about.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
     </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", style="color: white;background-color: red; float: right; position: absolute/fixed") }}</p>
     {{message}}
 </form>
 {% endblock %}

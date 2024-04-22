@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Загрузить файл:</h1>
+<h1 style="color: red;">Загрузить файл:</h1>
 {% if "video" in avatar %}
 <video width=500
        height=400
@@ -12,15 +12,19 @@
     <a href="{{avatar}}">Скачайте видео</a>.
 </video>
 {% elif "music" in avatar %}
-<audio controls>
+<br>
+<audio
+        controls>
     <source src="{{avatar}}" type="audio/mpeg">
     Тег audio не поддерживается вашим браузером. <a href="audio/music.mp3">Скачайте музыку</a>.
 </audio>
+<br>
+<br>
 {% else %}
-<img src={{avatar}} alt="картинка-аватар">
+<img src={{avatar}} alt="">
 {% endif %}
-<form class="avatar_form" enctype="multipart/form-data" method="post">
+<form  class="avatar_form" enctype="multipart/form-data" method="post">
     <input type="file" class="form-control-file" id="avatar" name="file">
-    <button type="submit">Загрузить аватар</button>
+    <button type="submit">Загрузить</button>
 </form>
 {% endblock %}

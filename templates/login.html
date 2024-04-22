@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Авторизация</h1>
+    <center><h1 style="color:red;">Авторизация</h1></center>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
             {{ form.name.label }}<br>
-            {{ form.name(class="form-control", type="name") }}<br>
+            {{ form.name(class="form-control", type="name", style="color: white;background-color: black") }}<br>
             {% for error in form.name.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
@@ -15,7 +15,7 @@
         </p>
         <p>
             {{ form.password.label }}<br>
-            {{ form.password(class="form-control", type="password") }}<br>
+            {{ form.password(class="form-control", type="password", style="color: white;background-color: black") }}<br>
             {% for error in form.password.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
@@ -23,7 +23,7 @@
             {% endfor %}
         </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        <p>{{ form.submit(type="submit", style="color: white;background-color: red; float: right; position: absolute/fixed;") }}</p>
         <div>{{ message }}</div>
     </form>
 {% endblock %}
