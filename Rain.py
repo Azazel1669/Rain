@@ -16,11 +16,11 @@ d = []
 DB_NAME = 'rain'
 
 
-@app.route("/")
-def index():
-    db_sess = db_session.create_session()
-    news = db_sess.query(Fan)
-    return render_template("index.html", news=news)
+# @app.route("/")
+# def index():
+#     db_sess = db_session.create_session()
+#     news = db_sess.query(Fan)
+#     return render_template("index.html", news=news)
 
 
 @app.route('/')
