@@ -2,7 +2,6 @@
 
 {% block content %}
 <center><h1><font size="32" color="#FF0000">Metallica</font></h1></center>
-<p>hhh</p>
 <div>
     <p>{% for part in text %}
     <div>
@@ -234,8 +233,9 @@
             <h3>{{part[part.index("(") + 5:part.index("*") - 1]}}</h3>{{part[part.index("*")
             + 4:]}}</p>
         </div>
+        {% elif "(%br)" in part %}
+        <div><br>{{part[5:]}}</div>
         {% elif "(%center)" in part %}
-        <br>
         <div>
             <p>{{part[:part.index("(")]}}
             <center style="color: white;">{{part[part.index("(") + 9:part.rfind("*") - 1]}}</center>
