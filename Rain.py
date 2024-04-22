@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import request, render_template, redirect, session
-from flask import url_for
+from flask import Flask, url_for, request, render_template, redirect
 from flask_login import login_user
 
 from data import db_session, fan_api
@@ -9,11 +7,15 @@ from data.users import User
 from forms.reg import LoginForm
 from forms.user import RegisterForm
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 s = ''
 d = []
 DB_NAME = 'rain'
+
+settings = {'user_name': 'Вася',
+            }
 
 
 @app.route('/')
@@ -48,9 +50,27 @@ def book():
     return render_template("book.html", text=d)
 
 
-@app.route('/enter')
+@app.route('/enter', methods=['POST', 'GET'])
 def enter():
-    return render_template("enter.html")
+    if request.method == 'POST':
+        f = request.files['file']
+        settings["avatar_file"] = f.filename
+        if settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp4":
+            f.save(f'static/video/{f.filename}')
+        elif settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp3":
+            f.save(f'static/music/{f.filename}')
+        else:
+            f.save(f'static/img/{f.filename}')
+
+    params = {'title': 'Выбор аватара!!!'}
+    if 'avatar_file' in settings:
+        if settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp4":
+            params['avatar'] = url_for('static', filename=f"video/{settings['avatar_file']}")
+        elif settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp3":
+            params['avatar'] = url_for('static', filename=f"music/{settings['avatar_file']}")
+        else:
+            params['avatar'] = url_for('static', filename=f"img/{settings['avatar_file']}")
+    return render_template("enter.html", **params)
 
 
 @app.route('/register', methods=['GET', 'POST'])

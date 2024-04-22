@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-{% if avatar %}
-<h1>Текущий аватар:</h1>
-<img src={{avatar}} alt="картинка-аватар">
+<h1>Загрузить файл:</h1>
+{% if "video" in avatar %}
+<video width=500
+       height=400
+       controls="controls" poster="{{avatar}}">
+    <source src="{{avatar}}"
+            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    Тег video не поддерживается вашим браузером.
+    <a href="{{avatar}}">Скачайте видео</a>.
+</video>
+{% elif "music" in avatar %}
+<audio controls>
+    <source src="{{avatar}}" type="audio/mpeg">
+    Тег audio не поддерживается вашим браузером. <a href="audio/music.mp3">Скачайте музыку</a>.
+</audio>
 {% else %}
-<h1>Аватар ещё не загружен.</h1>
+<img src={{avatar}} alt="картинка-аватар">
 {% endif %}
-
-
-<form action="" method="post" enctype="multipart/form-data" novalidate>
-    <div>
-        {{ form.csrf_token }}
-    </div>
-    {{ form.file(type="file", class="form-control-file") }}
-    {{ form.submit(type="submit", class="btn btn-primary") }}
+<form class="avatar_form" enctype="multipart/form-data" method="post">
+    <input type="file" class="form-control-file" id="avatar" name="file">
+    <button type="submit">Загрузить аватар</button>
 </form>
 {% endblock %}
