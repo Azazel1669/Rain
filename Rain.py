@@ -40,13 +40,14 @@ def edit():
             d.append(i)
         d = "".join(d)
         d = d.split("\n")
+        print(d)
         with open('text.txt', "w", encoding="UTF-8") as e:
             e.write(s)
         return redirect("/home")
 
 
-@app.route('/book')
-def book():
+@app.route('/book/<id>')
+def book(id):
     return render_template("book.html", text=d)
 
 
