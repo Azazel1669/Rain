@@ -3,11 +3,11 @@ from flask import request, render_template, redirect, session
 from flask import url_for
 from flask_login import login_user
 
-from data import db_session, fan_api
-from data.fan import Fan
-from data.users import User
-from forms.reg import LoginForm
-from forms.user import RegisterForm
+# from data import db_session, fan_api
+# from data.fan import Fan
+# from data.users import User
+# from forms.reg import LoginForm
+# from forms.user import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
