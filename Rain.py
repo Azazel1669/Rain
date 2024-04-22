@@ -48,7 +48,9 @@ def edit():
 
 @app.route('/book/<id>')
 def book(id):
-    return render_template("book.html", text=d)
+    print(1)
+    db_sess = db_session.create_session()
+    return render_template("book.html", text=db_sess.query(Fan).filter(Fan.id == id,).first())
 
 
 @app.route('/enter', methods=['POST', 'GET'])
