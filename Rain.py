@@ -16,17 +16,12 @@ d = []
 DB_NAME = 'rain'
 
 
-@app.route("/")
-def index():
-    db_sess = db_session.create_session()
-    news = db_sess.query(Fan)
-    return render_template("index.html", news=news)
-
-
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    db_sess = db_session.create_session()
+    news = db_sess.query(Fan)
+    return render_template("home.html", news=news)
 
 
 @app.route('/edit', methods=['POST', 'GET'])
@@ -91,7 +86,7 @@ def login():
         user = db_sess.query(User).filter(User.name == form.name.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
-            return redirect("/")
+            return redirect("/home")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
@@ -100,14 +95,6 @@ def login():
 
 def main():
     db_session.global_init(f"db/{DB_NAME}.db")
-    #user = User()
-    #user.name = "Пользователь 2"
-    #user.password = "qwerty123"
-    #user.about = 'hi everyone'
-    #db_sess = db_session.create_session()
-    #db_sess.add(user)
-    #db_sess.commit()
-    #fill_users(DB_NAME)
     app.register_blueprint(fan_api.blueprint)
     app.run(port=8080, host='127.0.0.1')
 
