@@ -45,19 +45,12 @@ def edit():
         d = d.split("\n")
         with open('text.txt', "w", encoding="UTF-8") as e:
             e.write(s)
-        print(d)
-
         return redirect("/home")
 
 
 @app.route('/book')
 def book():
     return render_template("book.html", text=d)
-
-
-@app.route('/home')
-def home():
-    return render_template("home.html")
 
 
 @app.route('/enter')
