@@ -1,11 +1,11 @@
 from flask import Flask, url_for, request, render_template, redirect
 from flask_login import login_user, LoginManager
 
-# from data import db_session, fan_api
-# from data.fan import Fan
-# from data.users import User
-# from forms.reg import LoginForm
-# from forms.user import RegisterForm
+from data import db_session, fan_api
+from data.fan import Fan
+from data.users import User
+from forms.reg import LoginForm
+from forms.user import RegisterForm
 
 
 app = Flask(__name__)
@@ -21,9 +21,9 @@ settings = {'user_name': 'Вася',
 @app.route('/')
 @app.route('/home')
 def home():
-    # db_sess = db_session.create_session()
-    # news = db_sess.query(Fan)
-    return render_template("home.html", news="news")
+    db_sess = db_session.create_session()
+    news = db_sess.query(Fan)
+    return render_template("home.html", news=news)
 
 
 @app.route('/edit', methods=['POST', 'GET'])
@@ -99,28 +99,27 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         db_sess = db_session.create_session()
-#         user = db_sess.query(User).filter(User.name == form.name.data).first()
-#         if user and user.check_password(form.password.data):
-#             login_user(user, remember=form.remember_me.data)
-#             print('hi')
-#             return redirect("/home")
-#         return render_template('login.html',
-#                                message="Неправильный логин или пароль",
-#                                form=form)
-#     return render_template('login.html', title='Авторизация', form=form)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.name == form.name.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            print('hi')
+            return redirect("/home")
+        return render_template('login.html',
+                               message="Неправильный логин или пароль",
+                               form=form)
+    return render_template('login.html', title='Авторизация', form=form)
 
 
-# def main():
-#     db_session.global_init(f"db/{DB_NAME}.db")
-#     app.register_blueprint(fan_api.blueprint)
-#     app.run(port=8080, host='127.0.0.1')
+def main():
+    db_session.global_init(f"db/{DB_NAME}.db")
+    app.register_blueprint(fan_api.blueprint)
+    app.run(port=8080, host='127.0.0.1')
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
-    # main()
+    main()

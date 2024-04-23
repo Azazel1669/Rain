@@ -9,7 +9,7 @@ from .db_session import SqlAlchemyBase
 
 
 class User(SqlAlchemyBase, UserMixin):
-    tablename = 'users'
+    __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
@@ -25,4 +25,4 @@ class User(SqlAlchemyBase, UserMixin):
         return check_password_hash(self.password, password)
 
     def repr(self):
-        return f"<{self.class.name}> {self.id} {self.name}"
+        return f"<{self.__class__.__name__}> {self.id} {self.name}"
