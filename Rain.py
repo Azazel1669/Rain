@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, render_template, redirect
-from flask_login import login_user
+from flask_login import login_user, LoginManager
 
 from data import db_session, fan_api
 from data.fan import Fan
@@ -8,14 +8,12 @@ from forms.reg import LoginForm
 from forms.user import RegisterForm
 
 
-app = Flask(__name__)
+app = Flask(name)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
 s = ''
 d = []
 DB_NAME = 'rain'
-
-settings = {'user_name': 'Вася',
-            }
 
 
 @app.route('/')
@@ -48,9 +46,7 @@ def edit():
 
 @app.route('/book/<id>')
 def book(id):
-    print(1)
-    db_sess = db_session.create_session()
-    return render_template("book.html", text=db_sess.query(Fan).filter(Fan.id == id,).first())
+    return render_template("book.html", text=d)
 
 
 @app.route('/enter', methods=['POST', 'GET'])
@@ -109,6 +105,7 @@ def login():
         user = db_sess.query(User).filter(User.name == form.name.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
+            print('hi')
             return redirect("/home")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
