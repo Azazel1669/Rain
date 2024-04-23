@@ -25,10 +25,14 @@
                     <a class="nav-link" href="/edit">Редактор</a>
                     <a class="nav-link" href="/enter">Отправить</a>
                 </div>
+
+                {% if current_user.is_authenticated %}
+                <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+                {% else %}
                 <div class="nav navbar-nav navbar-right">
                     <a class="nav-link" href="/register">Зарегистрироваться</a>
-                    <a class="nav-link" href="/login">Войти</a>
-                </div>
+                    <a class="nav-link" href="/login">Войти</a></div>
+                {% endif %}
             </div>
         </div>
     </nav>

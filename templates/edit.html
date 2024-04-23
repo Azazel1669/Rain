@@ -134,14 +134,15 @@
             }
             document.addEventListener("keyup", onKeyboardShotcut, false);
         </script>
-
-        <!--            <button onclick='play()'>-->
-        <!--                <img src="static/img/next.png">-->
-        <!--            </button>-->
-
+        {% if current_user.is_authenticated %}
         <div>
             <button type="submit" name="">Отправить</button>
         </div>
+        {% else %}
+        <div>
+            <button type="submit" disabled="disabled" name="">Отправить</button>
+        </div>
+        {% endif %}
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

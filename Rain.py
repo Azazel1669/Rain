@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, render_template, redirect
-from flask_login import login_user, LoginManager
+from flask_login import login_user, LoginManager, logout_user, login_required
 
 from data import db_session, fan_api
 from data.fan import Fan
@@ -9,6 +9,8 @@ from forms.user import RegisterForm
 
 
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 s = ''
@@ -26,9 +28,16 @@ def home():
     return render_template("home.html", news=news)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
+
+
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
     global d
+
     d = []
     if request.method == 'GET':
         return render_template("edit.html", title="title")
@@ -49,6 +58,15 @@ def edit():
 @app.route('/book/<id>')
 def book(id):
     return render_template("book.html", text=d)
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template()
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return render_template()
 
 
 @app.route('/enter', methods=['POST', 'GET'])
@@ -115,9 +133,17 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
+
 def main():
     db_session.global_init(f"db/{DB_NAME}.db")
     app.register_blueprint(fan_api.blueprint)
+
     app.run(port=8080, host='127.0.0.1')
 
 
