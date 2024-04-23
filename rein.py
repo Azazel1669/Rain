@@ -108,8 +108,11 @@ if __name__ == '__main__':
     main()
 
 
-
-
-
-
+# https://github.com/alproger/text-to-speech-telegram-bot
+# https://learn4kid-python.firebaseapp.com/python_data_structure/python_speech_recognition/#работа-с-аудио-фаилами
+# https://f.ggdt.ru/threads/1067/
+# https://stackoverflow.com/questions/32587015/audio-file-to-text-file-python
 file = ['_TelegramObject__INIT_PARAMS', '_TelegramObject__INIT_PARAMS_CHECK', '__annotations__', '__class__', '__deepcopy__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__slots__', '__str__', '__subclasshook__', '_apply_api_kwargs', '_bot', '_credentials', '_de_json', '_freeze', '_frozen', '_get_attrs', '_get_attrs_names', '_get_encoded_url', '_id_attrs', '_parse_data', '_prepare_decrypt', '_unfreeze', '_unfrozen', 'api_kwargs', 'de_json', 'de_list', 'download_as_bytearray', 'download_to_drive', 'download_to_memory', 'file_id', 'file_path', 'file_size', 'file_unique_id', 'get_bot', 'set_bot', 'set_credentials', 'to_dict', 'to_json']
+# https://habr.com/ru/articles/575158/
+# https://docs.python-telegram-bot.org/en/latest/telegram.ext.html
+# https://docs-python.ru/standart-library/modul-uuid-python/funktsija-uuid4-modulja-uuid/
