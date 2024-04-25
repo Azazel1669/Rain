@@ -3,7 +3,10 @@ from flask import jsonify, make_response, request
 
 from . import db_session
 from .fan import Fan
+from random import randint
 
+HOST = '127.0.0.1'
+PORT = '8080'
 blueprint = flask.Blueprint(
     'fan_api',
     __name__,
@@ -55,3 +58,11 @@ def get_one_news(fan_id):
                 'title', 'content', 'fandom', 'user_id'))
         }
     )
+
+
+@blueprint.route('/api/random', methods=['GET'])
+def get_random():
+    db_sess = db_session.create_session()
+    news = db_sess.query(Fan).all()
+    random_id = news[randint(1, len(news))].id
+    return f'http://{HOST}:{PORT}/book/{random_id}'

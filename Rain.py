@@ -20,6 +20,7 @@ DB_NAME = 'rain'
 settings = {'user_name': 'Вася',
             }
 
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -50,6 +51,9 @@ def edit():
         d = "".join(d)
         d = d.split("\n")
         print(d)
+        a = 'title but nothing'
+        fd = 'fandom but nothing'
+
         with open('text.txt', "w", encoding="UTF-8") as e:
             e.write(s)
         return redirect("/home")
@@ -58,6 +62,7 @@ def edit():
 @app.route('/book/<id>')
 def book(id):
     return render_template("book.html", text=d)
+
 
 @app.errorhandler(404)
 def not_found(error):
