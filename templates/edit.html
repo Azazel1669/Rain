@@ -14,47 +14,33 @@
         <br>
         <center><h1><font size="32" color="#FF0000">Редактор</font></h1></center>
     </div>
+    <div>
+        <section class="menubar-group" style="float: left;margin-left: 5.91em;">
+            <button onclick="onStrike()">
+                <del>S</del>
+            </button>
+            <button onclick="onBold()"><b>B</b></button>
+            <button onclick="onItalic()"><i>I</i></button>
+        </section>
+
+        <button type="button" style="float: left;margin-left: 0.1em;" onclick="onCenter()">center</button>
+        <button type="button" style="float: left;margin-left: 0.1em;" onclick="onRight()">right</button>
+        <section class="menubar-group" style="float: left;margin-left: 0.1em;">
+            <button type="button" onclick="onHider3line()">h3</button>
+            <button type="button" onclick="onHider2line()">h2</button>
+            <button type="button" onclick="onHider1line()">h1</button>
+        </section>
+
+        <section class="menubar-group" style="float: left;margin-left: 15.2em;">
+            <button type="button" onclick="onPhoto()">фото</button>
+            <button type="button" onclick="onVideo()">видео</button>
+            <button type="button" onclick="onMusic()">музыка</button>
+        </section>
+    </div>
     <form class="login_form" method="post">
-        <div>
-            <br><input style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
-                       type="text"
-                       id="s" name="author" value="{{current_user.name}}" disabled="disabled">
-            <br>
-            <br><input style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
-                       type="text"
-                       id="d" name="fandom">
-            <br>
-            <br><input style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
-                       type="text"
-                       id="b" name="title">
-            <br>
-        </div>
-        <br>
-        <div>
-            <section class="menubar-group" style="float: left;margin-left: 5.91em;">
-                <button onclick="onStrike()">
-                    <del>S</del>
-                </button>
-                <button onclick="onBold()"><b>B</b></button>
-                <button onclick="onItalic()"><i>I</i></button>
-            </section>
-
-            <button type="button" style="float: left;margin-left: 0.1em;" onclick="onCenter()">center</button>
-            <button type="button" style="float: left;margin-left: 0.1em;" onclick="onRight()">right</button>
-            <section class="menubar-group" style="float: left;margin-left: 0.1em;">
-                <button type="button" onclick="onHider3line()">h3</button>
-                <button type="button" onclick="onHider2line()">h2</button>
-                <button type="button" onclick="onHider1line()">h1</button>
-            </section>
-
-            <section class="menubar-group" style="float: left;margin-left: 15.2em;">
-                <button type="button" onclick="onPhoto()">фото</button>
-                <button type="button" onclick="onVideo()">видео</button>
-                <button type="button" onclick="onMusic()">музыка</button>
-            </section>
-        </div>
+        <center><textarea id='a' cols="75" rows="15" name="about" autofocus></textarea></center>
         <script>
-            const textarea = document.getElementById('about');
+            const textarea = document.getElementById('a');
 
             function onItalic() {
               if (textarea.selectionStart == textarea.selectionEnd) {
@@ -146,12 +132,29 @@
               }
             }
             document.addEventListener("keyup", onKeyboardShotcut, false);
+
         </script>
-        <center><textarea id='a' cols="75" rows="15" name="about" autofocus></textarea></center>
+
         {% if current_user.is_authenticated %}
         <div>
             {% set c = current_user.name %}
-            {{c}}
+            <div>
+                <br><input
+                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
+                    type="text"
+                    id="s" name="author" value="{{c}}">
+                <br>
+                <br><input
+                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
+                    type="text"
+                    id="d" name="fandom">
+                <br>
+                <br><input
+                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin; width: 600px"
+                    type="text"
+                    id="b" name="title">
+                <br>
+            </div>
             <button type="submit" name="">Отправить</button>
         </div>
         {% else %}
