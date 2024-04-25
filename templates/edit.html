@@ -14,20 +14,16 @@
         <br>
         <center><h1><font size="32" color="#FF0000">Редактор</font></h1></center>
     </div>
-    <br>
     <div>
-        <div><p>Автор:</p>
-            <center><textarea id='author' cols="75" rows="1" name="author" disabled="disabled" autofocus>{{current_user.name}}</textarea>
-            </center>
-        </div>
-        <div><p>Название:</p>
-            <center><textarea id='title' cols="75" rows="1" name="title" autofocus></textarea></center>
-        </div>
-        <div><p>Фендом:</p>
-            <center><textarea id='fendom' cols="75" rows="1" name="fendom" autofocus></textarea></center>
-        </div>
+        <br><input style="background-color: black;border-color: red;border-color: white;border-width: thin;" type="text"
+                   id="s" name="author" value="{{current_user.name}}" disabled="disabled">
+        <br>
+        <br><input style="background-color: black;border-color: red;border-color: white;border-width: thin;" type="text"
+                   id="d" name="fandom">
+        <br>
+        <br><input style="background-color: black;border-color: red;border-color: white;border-width: thin;" type="text"
+                   id="b" name="title">
     </div>
-    <br>
     <br>
     <div>
         <section class="menubar-group" style="float: left;margin-left: 5.91em;">
@@ -52,10 +48,9 @@
             <button type="button" onclick="onMusic()">музыка</button>
         </section>
     </div>
-    <div><center><textarea id='fanfic' cols="75" rows="15" name="fanfic" autofocus></textarea></center></div>
     <form class="login_form" method="post">
         <script>
-            const textarea = document.getElementById('fanfic');
+            const textarea = document.getElementById('about');
 
             function onItalic() {
               if (textarea.selectionStart == textarea.selectionEnd) {
@@ -148,6 +143,7 @@
             }
             document.addEventListener("keyup", onKeyboardShotcut, false);
         </script>
+        <center><textarea id='a' cols="75" rows="15" name="about" autofocus></textarea></center>
         {% if current_user.is_authenticated %}
         <div>
             {% set c = current_user.name %}
