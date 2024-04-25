@@ -1,11 +1,15 @@
 from random import randint
 import logging
+
+from requests import get
 from telegram.ext import Application, MessageHandler, filters, CommandHandler
 from config import BOT_TOKEN
 from telegram import ReplyKeyboardMarkup
 from telegram import ReplyKeyboardRemove
 import csv
 
+HOST = '127.0.0.1'
+PORT = '8080'
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
 )
@@ -55,12 +59,13 @@ async def help_with_plot(update, context):
 
 async def site(update, context):
     await update.message.reply_text(
-        "https://translate.yandex.ru/")
+        f"http://{HOST}:{PORT}")
 
 
 async def random_fanfic(update, context):
+    url = f"http://{HOST}:{PORT}/api/random"
     await update.message.reply_text(
-        'https://translate.yandex.ru/')
+        get(url).json()['link'])
 
 
 async def plot_twist(update, context):

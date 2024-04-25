@@ -64,5 +64,6 @@ def get_one_news(fan_id):
 def get_random():
     db_sess = db_session.create_session()
     news = db_sess.query(Fan).all()
-    random_id = news[randint(1, len(news))].id
-    return f'http://{HOST}:{PORT}/book/{random_id}'
+    random_id = news[randint(1, len(news)) - 1].id
+    link = f'http://{HOST}:{PORT}/book/{random_id}'
+    return jsonify({'link': link})
