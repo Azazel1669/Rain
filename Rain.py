@@ -37,25 +37,20 @@ def load_user(user_id):
 
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
-    global d
-
-    d = []
+    text = []
     if request.method == 'GET':
         return render_template("edit.html", title="title")
     elif request.method == 'POST':
-        s = request.form['about']
-        s = s.replace("<", "(")
-        s = s.replace(">", ")")
-        for i in s:
-            d.append(i)
-        d = "".join(d)
-        d = d.split("\n")
-        print(d)
-        a = 'title but nothing'
-        fd = 'fandom but nothing'
-
-        with open('text.txt', "w", encoding="UTF-8") as e:
-            e.write(s)
+        f = request.form['fanfic']
+        author = request.form['author']
+        title = request.form['title']
+        fendom = request.form['fendom']
+        f = f.replace("<", "(")
+        f = f.replace(">", ")")
+        for i in f:
+            text.append(i)
+        text = "".join(text)
+        text = text.split("\n")
         return redirect("/home")
 
 
