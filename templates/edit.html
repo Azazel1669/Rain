@@ -16,6 +16,20 @@
     </div>
     <br>
     <div>
+        <div><p>Автор:</p>
+            <center><textarea id='author' cols="75" rows="1" name="author" disabled="disabled" autofocus>{{current_user.name}}</textarea>
+            </center>
+        </div>
+        <div><p>Название:</p>
+            <center><textarea id='title' cols="75" rows="1" name="title" autofocus></textarea></center>
+        </div>
+        <div><p>Фендом:</p>
+            <center><textarea id='fendom' cols="75" rows="1" name="fendom" autofocus></textarea></center>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div>
         <section class="menubar-group" style="float: left;margin-left: 5.91em;">
             <button onclick="onStrike()">
                 <del>S</del>
@@ -38,10 +52,10 @@
             <button type="button" onclick="onMusic()">музыка</button>
         </section>
     </div>
+    <div><center><textarea id='fanfic' cols="75" rows="15" name="fanfic" autofocus></textarea></center></div>
     <form class="login_form" method="post">
-        <center><textarea id='a' cols="75" rows="15" name="about" autofocus></textarea></center>
         <script>
-            const textarea = document.getElementById("a");
+            const textarea = document.getElementById('fanfic');
 
             function onItalic() {
               if (textarea.selectionStart == textarea.selectionEnd) {
@@ -136,6 +150,8 @@
         </script>
         {% if current_user.is_authenticated %}
         <div>
+            {% set c = current_user.name %}
+            {{c}}
             <button type="submit" name="">Отправить</button>
         </div>
         {% else %}
