@@ -20,7 +20,6 @@ DB_NAME = 'rain'
 settings = {'user_name': 'Вася',
             }
 
-
 @app.route('/')
 @app.route('/home')
 def home():
@@ -37,20 +36,23 @@ def load_user(user_id):
 
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
-    text = []
+    d = []
     if request.method == 'GET':
         return render_template("edit.html", title="title")
     elif request.method == 'POST':
-        f = request.form['fanfic']
-        author = request.form['author']
-        title = request.form['title']
-        fendom = request.form['fendom']
-        f = f.replace("<", "(")
-        f = f.replace(">", ")")
-        for i in f:
-            text.append(i)
-        text = "".join(text)
-        text = text.split("\n")
+        c = request.form['author']
+        s = request.form['about']
+        v = request.form['title']
+        w = request.form['fandom']
+        s = s.replace("<", "(")
+        s = s.replace(">", ")")
+        for i in s:
+            d.append(i)
+        d = "".join(d)
+        d = d.split("\n")
+        print(d, c, v, w)
+        with open('text.txt', "w", encoding="UTF-8") as e:
+            e.write(s)
         return redirect("/home")
 
 
@@ -58,15 +60,14 @@ def edit():
 def book(id):
     return render_template("book.html", text=d)
 
-
-@app.errorhandler(404)
-def not_found(error):
-    return render_template()
-
-
-@app.errorhandler(400)
-def bad_request(_):
-    return render_template()
+# @app.errorhandler(404)
+# def not_found(error):
+#     return render_template()
+#
+#
+# @app.errorhandler(400)
+# def bad_request(_):
+#     return render_template()
 
 
 @app.route('/enter', methods=['POST', 'GET'])
