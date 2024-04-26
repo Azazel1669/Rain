@@ -68,7 +68,11 @@ def edit():
 
 @app.route('/book/<id>')
 def book(id):
-    return render_template("book.html", text=d)
+    return render_template("book.html", text=d, )
+
+@app.route('/bot')
+def bot():
+    return render_template("bot.html")
 
 # @app.errorhandler(404)
 # def not_found(error):

@@ -11,6 +11,11 @@ color:white
 h3 {
 color:white
 }
+input {
+ background-color: black;
+ color: white;
+ resize : none;
+}
 textarea {
  font-size: 24px;
  background-color: black;
