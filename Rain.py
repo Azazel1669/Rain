@@ -7,7 +7,6 @@ from data.users import User
 from forms.reg import LoginForm
 from forms.user import RegisterForm
 
-
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -19,6 +18,7 @@ DB_NAME = 'rain'
 
 settings = {'user_name': 'Вася',
             }
+
 
 @app.route('/')
 @app.route('/home')
@@ -46,17 +46,13 @@ def edit():
         w = request.form['fandom']
         s = s.replace("<", "(")
         s = s.replace(">", ")")
-        for i in s:
-            d.append(i)
-        d = "".join(d)
-        d = d.split("\n")
         db_sess = db_session.create_session()
         au_id = db_sess.query(User).filter(User.name == name).first().id
         print(d, au_id, v, w)
         db_sess = db_session.create_session()
         fan = Fan()
         fan.title = v
-        fan.content = d[0]
+        fan.content = s
         fan.fandom = w
         fan.user_id = au_id
         db_sess.add(fan)
@@ -68,11 +64,20 @@ def edit():
 
 @app.route('/book/<id>')
 def book(id):
-    return render_template("book.html", text=d, )
+    d = []
+    db_sess = db_session.create_session()
+    fan = db_sess.query(Fan).get(id).content
+    for i in fan:
+        d.append(i)
+    d = "".join(d)
+    d = d.split("\n")
+    return render_template("book.html", text=d)
+
 
 @app.route('/bot')
 def bot():
     return render_template("bot.html")
+
 
 # @app.errorhandler(404)
 # def not_found(error):
