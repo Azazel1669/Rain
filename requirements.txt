@@ -2,7 +2,6 @@ flask
 flask_login
 sqlalchemy
 sqlalchemy_serializer
-logging
 requests
 telegram
 telegram.ext
