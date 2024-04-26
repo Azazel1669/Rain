@@ -36,57 +36,45 @@ def load_user(user_id):
 
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
-    d = []
     if request.method == 'GET':
         return render_template("edit.html", title="title")
     elif request.method == 'POST':
         name = request.form['author']
-        s = request.form['about']
-        v = request.form['title']
-        w = request.form['fandom']
-        s = s.replace("<", "(")
-        s = s.replace(">", ")")
+        about = request.form['about']
+        title = request.form['title']
+        fandom = request.form['fandom']
+        about = about.replace("<", "(")
+        about = about.replace(">", ")")
         db_sess = db_session.create_session()
         au_id = db_sess.query(User).filter(User.name == name).first().id
-        print(d, au_id, v, w)
         db_sess = db_session.create_session()
         fan = Fan()
-        fan.title = v
-        fan.content = s
-        fan.fandom = w
+        fan.title = title
+        fan.content = about
+        fan.fandom = fandom
         fan.user_id = au_id
         db_sess.add(fan)
         db_sess.commit()
         with open('text.txt', "w", encoding="UTF-8") as e:
-            e.write(s)
+            e.write(about)
         return redirect("/home")
 
 
 @app.route('/book/<id>')
 def book(id):
-    d = []
+    text = []
     db_sess = db_session.create_session()
     fan = db_sess.query(Fan).get(id).content
     for i in fan:
-        d.append(i)
-    d = "".join(d)
-    d = d.split("\n")
-    return render_template("book.html", text=d)
+        text.append(i)
+    text = "".join(text)
+    text = text.split("\n")
+    return render_template("book.html", text=text)
 
 
 @app.route('/bot')
 def bot():
     return render_template("bot.html")
-
-
-# @app.errorhandler(404)
-# def not_found(error):
-#     return render_template()
-#
-#
-# @app.errorhandler(400)
-# def bad_request(_):
-#     return render_template()
 
 
 @app.route('/enter', methods=['POST', 'GET'])
@@ -145,7 +133,6 @@ def login():
         user = db_sess.query(User).filter(User.name == form.name.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
-            print('hi')
             return redirect("/home")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
@@ -163,7 +150,6 @@ def logout():
 def main():
     db_session.global_init(f"db/{DB_NAME}.db")
     app.register_blueprint(fan_api.blueprint)
-
     app.run(port=8080, host='127.0.0.1')
 
 
