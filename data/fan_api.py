@@ -5,6 +5,8 @@ from . import db_session
 from .fan import Fan
 from random import randint
 
+from .users import User
+
 HOST = '127.0.0.1'
 PORT = '8080'
 blueprint = flask.Blueprint(

@@ -2,7 +2,7 @@ from random import randint
 import logging
 
 from requests import get
-from telegram.ext import Application, MessageHandler, filters, CommandHandler
+from telegram.ext import Application, CommandHandler
 from config import BOT_TOKEN
 from telegram import ReplyKeyboardMarkup
 from telegram import ReplyKeyboardRemove
@@ -17,13 +17,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 reply_keyboard = [['/help', '/site'], ['/random_fanfic', '/help_with_plot']]
 reply_keyboard2 = [['/plot_twist', '/motivation'], ['/character_trait', '/back']]
+reply_keyboard3 = [['/styles', '/files'], ['/button_does_not_work', '/back'], ['/guidance']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 markup2 = ReplyKeyboardMarkup(reply_keyboard2, one_time_keyboard=False)
-FILE = 'random.csv'
+markup3 = ReplyKeyboardMarkup(reply_keyboard3, one_time_keyboard=False)
 
 
-def open_plot(file):
-    with open('random.csv', encoding='utf-8') as in_file:
+def open_plot():
+    with open('text/random.csv', encoding='utf-8') as in_file:
+        reader = csv.DictReader(in_file, delimiter=';')
+        s = [a for a in reader]
+        return s
+
+
+def open_guidance():
+    with open('text/guidance.csv', encoding='utf-8') as in_file:
         reader = csv.DictReader(in_file, delimiter=';')
         s = [a for a in reader]
         return s
@@ -31,15 +39,15 @@ def open_plot(file):
 
 async def start(update, context):
     await update.message.reply_text(
-        "Я бот-помощник для игр",
+        "Я Рэйн, чем могу помочь?)",
         reply_markup=markup
     )
 
 
 async def help(update, context):
     await update.message.reply_text(
-        "Чем я могу помочь? А хотя ничем, я просто бот... Для помощи есть инструкция, а я не она.",
-        reply_markup=markup
+        "*шелест страниц бумажной инструкции*",
+        reply_markup=markup3
     )
 
 
@@ -70,17 +78,37 @@ async def random_fanfic(update, context):
 
 async def plot_twist(update, context):
     await update.message.reply_text(
-        open_plot(FILE)[randint(1, 40)]['plot twist'])
+        open_plot()[randint(1, 40)]['plot twist'])
 
 
 async def motivation(update, context):
     await update.message.reply_text(
-        open_plot(FILE)[randint(1, 40)]['motivation'])
+        open_plot()[randint(1, 40)]['motivation'])
 
 
 async def character_trait(update, context):
     await update.message.reply_text(
-        open_plot(FILE)[randint(1, 40)]['character trait'])
+        open_plot()[randint(1, 40)]['character trait'])
+
+
+async def styles(update, context):
+    await update.message.reply_text(
+        open_guidance()[0]['styles'])
+
+
+async def files(update, context):
+    await update.message.reply_text(
+        open_guidance()[0]['files'])
+
+
+async def button_does_not_work(update, context):
+    await update.message.reply_text(
+        open_guidance()[0]['button does not work'])
+
+
+async def guidance(update, context):
+    await update.message.reply_text(
+        open_guidance()[0]['guidance'])
 
 
 async def back(update, context):
@@ -88,26 +116,6 @@ async def back(update, context):
         "Чем могу помочь?",
         reply_markup=markup
     )
-
-
-async def audio(update, context):
-    await update.message.reply_text(
-        "Audio!!!!!!!!!!",
-        reply_markup=markup
-    )
-    file = await context.bot.get_file(update.message.audio.file_id)
-    print(dir(file))
-    #await file.download_to_drive()
-
-
-async def voice(update, context):
-    await update.message.reply_text(
-        "Voice!!!!!!!!!!",
-        reply_markup=markup
-    )
-    file = await context.bot.get_file(update.message.voice.file_id)
-    print(dir(file))
-    #await file.download_to_drive()
 
 
 def main():
@@ -122,8 +130,10 @@ def main():
     application.add_handler(CommandHandler("close", close_keyboard))
     application.add_handler(CommandHandler("motivation", motivation))
     application.add_handler(CommandHandler("character_trait", character_trait))
-    application.add_handler(MessageHandler(filters.AUDIO, audio))
-    application.add_handler(MessageHandler(filters.VOICE, voice))
+    application.add_handler(CommandHandler("styles", styles))
+    application.add_handler(CommandHandler("files", files))
+    application.add_handler(CommandHandler("button_does_not_work", button_does_not_work))
+    application.add_handler(CommandHandler("guidance", guidance))
     application.run_polling()
 
 

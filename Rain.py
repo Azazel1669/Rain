@@ -40,7 +40,7 @@ def edit():
     if request.method == 'GET':
         return render_template("edit.html", title="title")
     elif request.method == 'POST':
-        c = request.form['author']
+        name = request.form['author']
         s = request.form['about']
         v = request.form['title']
         w = request.form['fandom']
@@ -50,7 +50,17 @@ def edit():
             d.append(i)
         d = "".join(d)
         d = d.split("\n")
-        print(d, c, v, w)
+        db_sess = db_session.create_session()
+        au_id = db_sess.query(User).filter(User.name == name).first().id
+        print(d, au_id, v, w)
+        db_sess = db_session.create_session()
+        fan = Fan()
+        fan.title = v
+        fan.content = d[0]
+        fan.fandom = w
+        fan.user_id = au_id
+        db_sess.add(fan)
+        db_sess.commit()
         with open('text.txt', "w", encoding="UTF-8") as e:
             e.write(s)
         return redirect("/home")

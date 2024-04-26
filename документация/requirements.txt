@@ -1,0 +1,11 @@
+flask
+flask_login
+sqlalchemy
+sqlalchemy_serializer
+sqlalchemy.orm
+logging
+requests
+telegram
+telegram.ext
+csv
+random

@@ -1,7 +1,5 @@
-import datetime
-
 import sqlalchemy
-from sqlalchemy import orm
+from sqlalchemy import orm, ARRAY, String
 from sqlalchemy_serializer import SerializerMixin
 
 from .db_session import SqlAlchemyBase
@@ -13,7 +11,7 @@ class Fan(SqlAlchemyBase, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    content = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    content = sqlalchemy.Column((sqlalchemy.String), nullable=True)
     fandom = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer,
                                 sqlalchemy.ForeignKey("users.id"))
