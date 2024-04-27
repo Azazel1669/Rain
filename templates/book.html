@@ -28,6 +28,149 @@
                 <a href="video/{{part[2:part.index('=') - 6]}}">Скачайте видео</a>.
             </video>
         </div>
+        {% elif "(%i)" in part and "(%center)" in part and part.index("i") < part.index("r") %}
+        <div>
+            <p style="color:white; float: center;position: absolute/fixed;">
+                {{part[:part.index("(")]}}
+                <i style="color:white;">{{part[part.index("%") + 3:part.rfind("%") - 1]}}
+                    <center style="float: center;position: absolute/fixed;">{{part[part.rfind("%")
+                        + 8:part.index("*") - 1]}}
+                    </center>
+                    {{part[part.index("*") + 8:part.rfind("*")
+                    - 1:]}}
+                </i>
+                {{part[part.rfind("*")
+                + 3:]}}
+            </p>
+        </div>
+        {% elif "(%b)" in part and "(%center)" in part and part.index("b") < part.index("r") %}
+        <div>
+            <p style="color:white; float: center;position: absolute/fixed;">
+                {{part[:part.index("(")]}}
+                <b style="color:white; float: center;position: absolute/fixed;">{{part[part.index("%") +
+                    3:part.rfind("%") - 1]}}
+                    <center style="float: center;position: absolute/fixed;">{{part[part.rfind("%")
+                        + 8:part.index("*") - 1]}}
+                    </center>
+                    {{part[part.index("*") + 8:part.rfind("*")
+                    - 1:]}}
+                </b>
+                {{part[part.rfind("*")
+                + 3:]}}
+            </p>
+        </div>
+        {% elif "(%i)" in part and "(%center)" in part and part.index("i") > part.index("r") %}
+        <div>
+            <p style="color:white;">{{part[:part.index("(")]}}
+                <i style="color:white;float: center;position: absolute/fixed;">{{part[part.index("%") +
+                    8:part.rfind("%")
+                    - 1]}}
+                    <center style="float: center;position: absolute/fixed;">{{part[part.rfind("%")
+                        + 3:part.index("*") - 1]}}
+                    </center>
+                    {{part[part.index("*") + 3:part.rfind("*")
+                    - 1:]}}
+                </i>
+                {{part[part.rfind("*")
+                + 8:]}}
+            </p>
+        </div>
+        {% elif "(%b)" in part and "(%center)" in part and part.index("b") > part.index("r") %}
+        <div>
+            <p>{{part[:part.index("(")]}}
+                <b style="color:white; float: center;position: absolute/fixed;">{{part[part.index("%") +
+                    8:part.rfind("%") - 1]}}
+                    <center style="float: center;position: absolute/fixed;">{{part[part.rfind("%")
+                        + 3:part.index("*") - 1]}}
+                    </center>
+                    {{part[part.index("*") + 3:part.rfind("*")
+                    - 1:]}}
+                </b>
+                {{part[part.rfind("*")
+                + 8:]}}
+            </p>
+        </div>
+        {% elif "(%h1)" in part and "(%center)" in part and part.index("h") < part.index("c") %}
+        <div>
+            <p>
+                {{part[:part.index("(")]}}
+            <h1>{{part[part.index("%") + 4:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 8:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 8:part.rfind("*")
+                - 1:]}}
+            </h1>
+            {{part[part.rfind("*")
+            + 4:]}}</p>
+        </div>
+        {% elif "(%h2)" in part and "(%center)" in part and part.index("h") < part.index("c") %}
+        <div>
+            <p>
+                {{part[:part.index("(")]}}
+            <h2>{{part[part.index("%") + 4:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 8:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 8:part.rfind("*")
+                - 1:]}}
+            </h2>
+            {{part[part.rfind("*")
+            + 4:]}}</p>
+        </div>
+        {% elif "(%h3)" in part and "(%center)" in part and part.index("h") < part.index("c") %}
+        <div>
+            <p>
+                {{part[:part.index("(")]}}
+            <h3>{{part[part.index("%") + 4:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 8:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 8:part.rfind("*")
+                - 1:]}}
+            </h3>
+            {{part[part.rfind("*")
+            + 4:]}}</p>
+        </div>
+        {% elif "(%h1)" in part and "(%center)" in part and part.index("h") > part.index("c") %}
+        <div>
+            <p>{{part[:part.index("(")]}}
+            <h1>{{part[part.index("%") + 8:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 4:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 4:part.rfind("*")
+                - 1:]}}
+            </h1>
+            {{part[part.rfind("*")
+            + 8:]}}</p>
+        </div>
+        {% elif "(%h2)" in part and "(%center)" in part and part.index("h") > part.index("c") %}
+        <div>
+            <p>{{part[:part.index("(")]}}
+            <h2>{{part[part.index("%") + 8:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 4:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 4:part.rfind("*")
+                - 1:]}}
+            </h2>
+            {{part[part.rfind("*")
+            + 8:]}}</p>
+        </div>
+        {% elif "(%h3)" in part and "(%center)" in part and part.index("h") > part.index("c") %}
+        <div>
+            <p>{{part[:part.index("(")]}}
+            <h3>{{part[part.index("%") + 8:part.rfind("%") - 1]}}
+                <center>{{part[part.rfind("%")
+                    + 4:part.index("*") - 1]}}
+                </center>
+                {{part[part.index("*") + 4:part.rfind("*")
+                - 1:]}}
+            </h3>
+            {{part[part.rfind("*")
+            + 8:]}}</p>
+        </div>
         {% elif "(%i)" in part and "(%b)" in part and part.index("i") < part.index("b") %}
         <div>
             <p>{{part[:part.index("(")]}}<i>{{part[part.index("%") + 3:part.rfind("%") - 1]}}<b>{{part[part.rfind("%")
