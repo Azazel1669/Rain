@@ -1,7 +1,9 @@
-flask
-flask_login
-sqlalchemy
-sqlalchemy_serializer
+Flask
+Flask_Login
+Flask-WTF
+WTForms
+SQLAlchemy
+SQLAlchemy_serializer
+Werkzeug
+python-telegram-bot
 requests
-telegram
-telegram.ext
