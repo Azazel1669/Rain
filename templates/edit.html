@@ -31,7 +31,7 @@
             <button type="button" onclick="onHider1line()">h1</button>
         </section>
 
-        <section class="menubar-group" style="float: left;margin-left: 15.2em;">
+        <section class="menubar-group" style="float: left;margin-left: 12.32em;">
             <button type="button" onclick="onPhoto()">фото</button>
             <button type="button" onclick="onVideo()">видео</button>
             <button type="button" onclick="onMusic()">музыка</button>
@@ -139,18 +139,20 @@
         <div>
             {% set c = current_user.name %}
             <div>
-                <br><input
-                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
+                <br><p style="float: left;margin-left: 5.91em;">Автор: </p>
+                <input
+                    style="float: left;margin-left: 1.67em; background-color: black; border-color: white;border-width: thin;"
                     type="text"
-                    id="s" name="author" value="{{c}}">
-                <br>
-                <br><input
-                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin;"
+                    id="s" name="author" value="{{c}}"></p>
+                <br><p style="float: left;margin-left: 5.91em;">Фэндом: </p>
+                <input
+                    style="float: left;margin-left: 1.01em; background-color: black; border-color: white;border-width: thin;"
                     type="text"
                     id="d" name="fandom">
                 <br>
-                <br><input
-                    style="float: left;margin-left: 5.91em; background-color: black; border-color: white;border-width: thin; width: 600px"
+                <br><p style="float: left;margin-left: 5.91em;">Название: </p>
+                <input
+                    style="float: left;margin-left: 0.4em; background-color: black; border-color: white;border-width: thin; width: 600px"
                     type="text"
                     id="b" name="title" value="?">
                 <br>
