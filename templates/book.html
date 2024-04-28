@@ -376,7 +376,7 @@
             <h3>{{part[part.index("(") + 5:part.index("*") - 1]}}</h3>{{part[part.index("*")
             + 4:]}}</p>
         </div>
-        {% elif "(%br)" in part %}
+        {% elif "(br)" in part %}
         <div><br>{{part[5:]}}</div>
         {% elif "(%center)" in part %}
         <div>
