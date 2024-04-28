@@ -83,11 +83,11 @@ def enter():
         f = request.files['file']
         settings["avatar_file"] = f.filename
         if settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp4":
-            f.save(f'static/video/{f.filename}')
+            f.save(f'/static/video/{f.filename}')
         elif settings['avatar_file'][settings['avatar_file'].rfind(".") + 1:] == "mp3":
-            f.save(f'static/music/{f.filename}')
+            f.save(f'/static/music/{f.filename}')
         else:
-            f.save(f'static/img/{f.filename}')
+            f.save(f'/static/img/{f.filename}')
 
     params = {'title': 'Выбор аватара!!!'}
     if 'avatar_file' in settings:
