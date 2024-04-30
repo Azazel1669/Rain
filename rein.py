@@ -8,8 +8,6 @@ from telegram import ReplyKeyboardMarkup
 from telegram import ReplyKeyboardRemove
 import csv
 
-HOST = '127.0.0.1'
-PORT = '8080'
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
 )
