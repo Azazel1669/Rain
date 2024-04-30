@@ -65,5 +65,5 @@ def get_random():
     db_sess = db_session.create_session()
     news = db_sess.query(Fan).all()
     random_id = news[randint(1, len(news)) - 1].id
-    link = f'http://{HOST}:{PORT}/book/{random_id}'
+    link = f'https://literate-exultant-joke.glitch.me/book/{random_id}' 
     return jsonify({'link': link})
