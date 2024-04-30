@@ -67,11 +67,11 @@ async def help_with_plot(update, context):
 
 async def site(update, context):
     await update.message.reply_text(
-        f"http://{HOST}:{PORT}")
+        "https://literate-exultant-joke.glitch.me/")
 
 
 async def random_fanfic(update, context):
-    url = f"http://{HOST}:{PORT}/api/random"
+    url = f"https://literate-exultant-joke.glitch.me/api/random"
     await update.message.reply_text(
         get(url).json()['link'])
 
